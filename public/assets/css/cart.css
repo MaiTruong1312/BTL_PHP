@@ -1,0 +1,38 @@
+.cart-empty {
+  text-align: center;
+  padding: 50px 20px;
+  color: #555;
+}
+
+.cart-empty img {
+  opacity: 1;
+}
+
+.cart-empty .btn {
+  margin-top: 15px;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.product-suggestions {
+  margin-top: 40px;
+}
+
+.product-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.product-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  width: 180px;
+  text-align: center;
+  background-color: #f9f9f9;
+}

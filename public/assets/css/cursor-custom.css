@@ -1,0 +1,88 @@
+/* Mặc định */
+body {
+  cursor: url("../../../images/cursor1.ico") 0 0, auto;
+}
+
+/* Khi hover vào nút bấm */
+button:hover {
+  cursor: url("../../../images/cursor2.ico") 0 0, pointer;
+}
+
+/* Khi nhấn giữ chuột (active) trên nút */
+button:active {
+  cursor: url("../../../images/cursor2.ico") 0 0, grabbing;
+}
+
+/* Khi kéo thả */
+.dragging {
+  cursor: url("../../../images/cursor2.ico") 0 0, grabbing;
+}
+
+/* Khi hover trên link */
+a:hover {
+  cursor: url("../../../images/cursor2.ico") 0 0, pointer;
+}
+
+/* Khi di chuyển trên vùng có class .move-area */
+.move-area {
+  cursor: url("../../../images/cursor1.ico") 0 0, move;
+}
+/* Tia sáng dài */
+.particle,
+.ember {
+  position: fixed; /* dùng fixed để chuẩn theo viewport */
+  z-index: 9999; /* đảm bảo nằm trên header và mọi thứ */
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 18px;
+  pointer-events: none;
+  transform-origin: center;
+  animation: fly ease-out forwards;
+  /* Gradient để giống lửa */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 0, 1),
+    rgba(255, 69, 0, 0.8),
+    rgba(255, 69, 0, 0)
+  );
+  border-radius: 50%;
+  filter: blur(0.6px); /* làm mềm viền */
+  box-shadow: 0 0 10px rgba(255, 200, 0, 0.9);
+}
+
+@keyframes fly {
+  from {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--dx), var(--dy)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.ember {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: orange;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall ease-in forwards;
+  box-shadow: 0 0 6px orange, 0 0 10px yellow;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(120px);
+    opacity: 0;
+  }
+}

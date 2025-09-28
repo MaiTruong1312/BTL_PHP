@@ -1,0 +1,57 @@
+/project-root
+├── .env                      # cấu hình môi trường (DB, API keys)
+├── .gitignore
+├── composer.json             # nếu dùng Composer
+├── public/                   # thư mục webroot (được server trỏ tới)
+│   ├── index.php             # front controller
+│   ├── .htaccess             # rewrite rules
+│   ├── assets/
+│   │   ├── css/
+│   │   ├── js/
+│   │   └── images/
+│   └── uploads/              # hình sản phẩm, invoices (chỉ public uploads)
+│       └── products/
+├── app/                      # mã nguồn ứng dụng (MVC)
+│   ├── Controllers/
+│   │   ├── HomeController.php
+│   │   ├── ProductController.php
+│   │   ├── CategoryController.php
+│   │   └── CartController.php
+│   ├── Models/
+│   │   ├── Product.php
+│   │   ├── Category.php
+│   │   ├── User.php
+│   │   └── Order.php
+│   ├── Views/
+│   │   ├── layouts/
+│   │   │   └── main.php
+│   │   ├── product/
+│   │   │   ├── list.php
+│   │   │   └── detail.php
+│   │   └── cart/
+│   │       └── index.php
+│   ├── Services/             # business logic: payment, shipping, search
+│   │   ├── PaymentService.php
+│   │   └── ShippingService.php
+│   └── Helpers/              # helper functions, validators
+│       └── Utils.php
+├── config/
+│   ├── database.php
+│   └── app.php
+├── routes/
+│   └── web.php               # định nghĩa routes (hoặc dùng routing lib)
+├── storage/
+│   ├── logs/
+│   └── cache/
+├── resources/                # file templates, seeders, emails
+│   ├── views/                # nếu dùng template engine riêng
+│   └── emails/
+├── database/
+│   ├── migrations/
+│   ├── seeds/
+│   └── schema.sql
+├── tests/                    # unit / integration tests
+├── docs/                     # hướng dẫn, ER-diagram, API docs
+└── deployment/               # scripts hoặc Dockerfile, nginx conf
+    ├── Dockerfile
+    └── nginx.conf
