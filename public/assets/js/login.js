@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = 0; i < numBAer; i++) {
     const span = document.createElement("span");
     span.classList.add("BAer");
-    span.innerText = "DOI VAI L*N M OI!";
+    span.innerText = "Hi";
     span.style.position = "absolute";
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * window.innerHeight;

@@ -3,20 +3,34 @@ session_start();
 require_once __DIR__ . "/../../../config/connect.php";
 $error = '';
 
+// Lấy email từ cookie nếu có
+$email_cookie = $_COOKIE['remember_email'] ?? '';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
-
-    // Kiểm tra tài khoản theo email hoặc username
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
     $stmt->execute(['email' => $username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password_hash'])) {
-        // Đúng mật khẩu
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['name'];
-        $_SESSION['role'] = $user['role'];
+        // Lưu user vào session
+        $_SESSION['user'] = [
+            'id'      => $user['id'],
+            'name'    => $user['name'],
+            'email'   => $user['email'],
+            'role'    => $user['role'],
+            'phone'   => $user['phone'],
+            'address' => $user['address']
+        ];
+
+        // Nếu tick "ghi nhớ đăng nhập" thì lưu cookie
+        if (!empty($_POST['remember'])) {
+            setcookie("remember_email", $user['email'], time() + (86400 * 30), "/"); // 30 ngày
+        } else {
+            // Nếu không tick thì xoá cookie cũ (nếu có)
+            setcookie("remember_email", "", time() - 3600, "/");
+        }
 
         header("Location: ../../../public/index.php");
         exit();
@@ -48,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         type="text"
         name="username"
         placeholder="Email đăng nhập"
+        value="<?= htmlspecialchars($email_cookie) ?>"
         required
       />
       <input
@@ -56,6 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         placeholder="Nhập mật khẩu"
         required
       />
+      <label style="display:block; margin:10px 0; text-align:left; font-size:14px;">
+        <input type="checkbox" name="remember" value="1"
+          <?= $email_cookie ? 'checked' : '' ?>>
+        Ghi nhớ đăng nhập
+      </label>
       <button type="submit">Đăng nhập</button>
     </form>
 

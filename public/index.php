@@ -76,7 +76,7 @@ $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
   </div>
 
   <!-- Latest Products -->
-  <h2 id="products focus-in-expand-fwd" class="name" >Sản phẩm mới nhất</h2>
+  <h2 class="name focus-in-expand-fwd" >Sản phẩm mới nhất</h2>
   <div class="products">
     <?php foreach ($newest as $p): ?>
       <?php $isInWishlist = in_array($p['id'], $wishlist); ?>
@@ -192,7 +192,27 @@ $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <script src="https://unpkg.com/scrollreveal"></script>
 <script>
-  // Sản phẩm: hiện lần lượt từng cái, có scale nhẹ
+  const backToTop = document.getElementById("backToTop");
+
+// Khi scroll xuống 200px thì hiện nút
+window.onscroll = function () {
+  if (
+    document.body.scrollTop > 200 ||
+    document.documentElement.scrollTop > 200
+  ) {
+    backToTop.style.display = "block";
+  } else {
+    backToTop.style.display = "none";
+  }
+};
+backToTop.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+    
+  });
+});
+
   ScrollReveal().reveal('.product', {
     duration: 800,
     distance: '40px',
@@ -203,9 +223,9 @@ $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     reset: true
   });
 
-  // Danh mục: bay từ trái qua, có delay nhẹ
+
   ScrollReveal().reveal('.cat-card', {
-    duration: 800,
+    duration: 500,
     distance: '60px',
     origin: 'left',
     easing: 'ease-out',
@@ -215,7 +235,7 @@ $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
   // Banner & các section chính: fade + trượt từ trên xuống
   ScrollReveal().reveal('#main, #products, .menu, .banner-main', {
-    duration: 800,
+    duration: 500,
     distance: '70px',
     origin: 'top',
     opacity: 0,
